@@ -1,5 +1,5 @@
 //
-//  TODOView.swift
+//  TodoView.swift
 //  MVVM-iOS
 //
 //  Created by BYUNGWOOK JEONG on 4/29/24.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-class TODOView: UIView {
+class TodoView: UIView {
 
-    var todo: TODO? {
+    var todo: Todo? {
         didSet {
             titleLabel.text = todo?.title
             contentView.text = todo?.content

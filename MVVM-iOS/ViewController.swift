@@ -12,8 +12,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        let todoView = TODOView(frame: view.frame)
-        todoView.todo = TODO(title: "first title", content: "hello world!")
+        let todoView = TodoView(frame: view.frame)
+        todoView.todo = Todo(title: "first title", content: "hello world!")
         view.addSubview(todoView)
     }
 }
