@@ -15,12 +15,10 @@ final class TodoTableViewModel: ObservableObject {
     private let todoService = TodoService()
 
     init() {
-        todos = [Todo(title: "alkefale", content: "alkenflae")]
-//        Task {
-//            let todos = await todoService.fetchTodos()
-//            setTodos(todos)
-//            print("todos \(todos.count)")
-//        }
+        Task {
+            let todos = await todoService.fetchTodos()
+            setTodos(todos)
+        }
     }
 
     private func setTodos(_ todos: [Todo]) {

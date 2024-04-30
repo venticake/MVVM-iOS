@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TodoView: UIView {
+final class TodoView: UIView {
 
     var todo: Todo? {
         didSet {

@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class TodoTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+final class TodoTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     private let todoTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -23,14 +23,20 @@ class TodoTableViewController: UIViewController, UITableViewDataSource, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        todoTableViewModel
-            .$todos
-            .sink { _ in }
+        todoTableViewModel.$todos
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.todoTableView.reloadData()
+            }
             .store(in: &cancellables)
     }
 
     private func setupViews() {
         view.addSubview(todoTableView)
+
+        // set data source & delegate
+        todoTableView.dataSource = self
+        todoTableView.delegate = self
 
         // set auto-layout
         NSLayoutConstraint.activate([
@@ -39,24 +45,18 @@ class TodoTableViewController: UIViewController, UITableViewDataSource, UITableV
             todoTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             todoTableView.rightAnchor.constraint(equalTo: view.rightAnchor)
         ])
-
-        // set data source & delegate
-        todoTableView.dataSource = self
-        todoTableView.delegate = self
     }
 
     // MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return todoTableViewModel.todos.count
-        return 1
+        return todoTableViewModel.todos.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard var cell = tableView.dequeueReusableCell(withIdentifier: "TodoTableViewCell", for: indexPath) as? TodoTableViewCell else {
-            return UITableViewCell() // 임시
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TodoTableViewCell", for: indexPath) as! TodoTableViewCell
         cell.todo = todoTableViewModel.todos[indexPath.row]
+        cell.selectionStyle = .none
 
         return cell
     }
