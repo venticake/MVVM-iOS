@@ -10,12 +10,22 @@ import Foundation
 struct ColorCard: Identifiable {
 
     let id: String
-    let title: String
-    let content: String
+    let hexCode: String
 
-    init(id: String = UUID().uuidString, title: String, content: String) {
+    init(id: String = UUID().uuidString, hexCode: String = generateRandomHexColor()) {
         self.id = id
-        self.title = title
-        self.content = content
+        self.hexCode = hexCode
+    }
+
+    private static func generateRandomHexColor() -> String {
+        // 랜덤하게 생성된 RGB 값을 저장할 배열 인스턴스 생성
+        var randomColorCode = "#"
+
+        for _ in 1...3 {
+            let randomByte = Int.random(in: 0...255)
+            randomColorCode += String(format: "%02X", randomByte)
+        }
+
+        return randomColorCode
     }
 }
