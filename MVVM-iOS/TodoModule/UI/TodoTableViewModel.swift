@@ -12,12 +12,13 @@ final class TodoTableViewModel: ObservableObject {
 
     @Published private(set) var todos: [Todo] = []
 
+    private var isFetching = false
+
     private let todoService = TodoService()
 
     init() {
         Task {
-            let todos = await todoService.fetchTodos()
-            setTodos(todos)
+            await fetchNextTodos()
         }
     }
 
@@ -33,5 +34,15 @@ final class TodoTableViewModel: ObservableObject {
     func removeTodo(id: String) {
         todos = todoService.removeTodo(id: id, from: todos)
         setTodos(todos)
+    }
+
+    func fetchNextTodos() async {
+        guard !isFetching else {
+            return
+        }
+        isFetching = true
+        let todos = await todoService.fetchTodos(from: todos.count)
+        setTodos(self.todos + todos)
+        isFetching = false
     }
 }

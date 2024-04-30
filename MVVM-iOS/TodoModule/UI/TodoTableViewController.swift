@@ -8,8 +8,12 @@
 import UIKit
 import Combine
 
-final class TodoTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+final class TodoTableViewController:
+    UIViewController,
+    UITableViewDataSource,
+    UITableViewDelegate,
+    UITableViewDataSourcePrefetching
+{
     private let todoTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.register(TodoTableViewCell.self, forCellReuseIdentifier: "TodoTableViewCell")
@@ -37,6 +41,7 @@ final class TodoTableViewController: UIViewController, UITableViewDataSource, UI
         // set data source & delegate
         todoTableView.dataSource = self
         todoTableView.delegate = self
+        todoTableView.prefetchDataSource = self
 
         // set auto-layout
         NSLayoutConstraint.activate([
@@ -65,5 +70,18 @@ final class TodoTableViewController: UIViewController, UITableViewDataSource, UI
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100.0
+    }
+
+    // MARK: - UITableViewDataSourcePrefetching
+
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        guard let maxIndexPath = indexPaths.max(by: { $0.row < $1.row }),
+              maxIndexPath.row >= todoTableViewModel.todos.count - 1 else {
+            return
+        }
+
+        Task {
+            await todoTableViewModel.fetchNextTodos()
+        }
     }
 }

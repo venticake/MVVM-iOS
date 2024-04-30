@@ -9,14 +9,15 @@ import Foundation
 
 struct TodoService {
 
-    func fetchTodos() async -> [Todo] {
-        let todos: [Todo] = [
-            Todo(title: "temp title 1", content: "temp content 1"),
-            Todo(title: "temp title 2", content: "temp content 2"),
-            Todo(title: "temp title 3", content: "temp content 3"),
-            Todo(title: "temp title 4", content: "temp content 4"),
-            Todo(title: "temp title 5", content: "temp content 5")
-        ]
+    func fetchTodos(from: Int = 0, count: Int = 10) async -> [Todo] {
+        var todos = [Todo]()
+
+        for index in from..<from + count {
+            let todo = Todo(title: "temp title \(index)", content: "temp content")
+            todos.append(todo)
+        }
+
+        try? await Task.sleep(nanoseconds: 1_000_000_000) // 1.0 s
 
         return todos
     }
