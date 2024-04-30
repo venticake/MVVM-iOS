@@ -7,8 +7,15 @@
 
 import Foundation
 
-struct Todo {
+struct Todo: Identifiable {
 
+    let id: String
     let title: String
     let content: String
+
+    init(id: String = UUID().uuidString, title: String, content: String) {
+        self.id = id
+        self.title = title
+        self.content = content
+    }
 }

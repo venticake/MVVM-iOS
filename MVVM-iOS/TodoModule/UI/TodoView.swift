@@ -18,16 +18,16 @@ class TodoView: UIView {
 
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.backgroundColor = .yellow
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     private let contentView: UITextView = {
         let textView = UITextView()
-        textView.translatesAutoresizingMaskIntoConstraints = false
         textView.isEditable = false
         textView.backgroundColor = .green
+        textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
     }()
 
