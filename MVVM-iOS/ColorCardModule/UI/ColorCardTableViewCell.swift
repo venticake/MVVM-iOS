@@ -36,11 +36,14 @@ final class ColorCardTableViewCell: UITableViewCell {
         contentView.addSubview(titleLabel)
 
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10)
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10.0),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10.0),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10.0)
         ])
+
+        let constraint = titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10.0)
+        constraint.priority = UILayoutPriority(999)
+        constraint.isActive = true
     }
 }
 

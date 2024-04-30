@@ -66,6 +66,15 @@ final class ColorCardTableViewController:
         return cell
     }
 
+    // TODO: cell 삭제시 발생하는 auto-layout 문제 수정해야 함
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let colorCardId = colorCardTableViewModel.colorCards[indexPath.row].id
+            colorCardTableViewModel.removeColorCard(id: colorCardId)
+            colorCardTableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+
     // MARK: - UITableViewDelegate
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

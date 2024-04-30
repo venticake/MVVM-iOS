@@ -11,7 +11,7 @@ struct ColorCardService {
 
     private let colorCardRepository = ColorCardRepository()
 
-    func fetchColorCards(from: Int = 0, count: Int = 10) async -> [ColorCard] {
+    func fetchColorCards(from: Int = 0, count: Int = 30) async -> [ColorCard] {
         return await colorCardRepository.fetchColorCards(from: from, count: count)
     }
 
