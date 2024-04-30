@@ -61,7 +61,9 @@ final class TodoTableViewController: UIViewController, UITableViewDataSource, UI
         return cell
     }
 
+    // MARK: - UITableViewDelegate
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100.0 // 임시
+        return 100.0
     }
 }
