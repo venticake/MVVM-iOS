@@ -1,5 +1,5 @@
 //
-//  TodoTableViewCell.swift
+//  ColorCardTableViewCell.swift
 //  MVVM-iOS
 //
 //  Created by BYUNGWOOK JEONG on 4/30/24.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-final class TodoTableViewCell: UITableViewCell {
+final class ColorCardTableViewCell: UITableViewCell {
 
-    var todo: Todo? {
+    var colorCard: ColorCard? {
         didSet {
-            titleLabel.text = todo?.title
+            titleLabel.text = colorCard?.title
         }
     }
 
