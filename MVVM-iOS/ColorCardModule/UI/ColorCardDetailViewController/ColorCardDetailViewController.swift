@@ -32,6 +32,10 @@ final class ColorCardDetailViewController: UIViewController {
             .store(in: &cancellables)
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        colorCardViewModel?.deselectColorCard()
+    }
+
     private func configureNavigationTitle(title: String?) {
         self.title = title
     }
