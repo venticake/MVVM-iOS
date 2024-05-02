@@ -46,14 +46,3 @@ final class ColorCardTableViewCell: UITableViewCell {
         constraint.isActive = true
     }
 }
-
-extension UIColor {
-
-    static func getUIColor(from colorCard: ColorCard?) -> UIColor? {
-        guard let colorCard else {
-            return nil
-        }
-
-        return UIColor(red: colorCard.redCGFloat, green: colorCard.greenCGFloat, blue: colorCard.blueCGFloat, alpha: colorCard.alphaCGFloat)
-    }
-}
