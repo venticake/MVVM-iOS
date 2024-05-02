@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = ColorCardTableViewController() // RootViewController
+        window?.rootViewController = UINavigationController(rootViewController: ColorCardTableViewController())
         window?.makeKeyAndVisible()
     }
 

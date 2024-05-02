@@ -7,7 +7,6 @@
 
 import Foundation
 
-/// entity -> model
 struct ColorCardRepository {
 
     func fetchColorCards(from: Int, count: Int) async -> [ColorCard] {

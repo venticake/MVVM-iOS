@@ -19,6 +19,7 @@
 		8BB9E2182BE0C05600A45E64 /* ColorCardRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9E2172BE0C05600A45E64 /* ColorCardRepository.swift */; };
 		8BB9E21A2BE30FEC00A45E64 /* ColorCardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9E2192BE30FEC00A45E64 /* ColorCardDetailViewController.swift */; };
 		8BB9E21E2BE3109600A45E64 /* ColorCard+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9E21D2BE3109600A45E64 /* ColorCard+UIColor.swift */; };
+		8BB9E2212BE3114000A45E64 /* ColorCardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9E2202BE3114000A45E64 /* ColorCardDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		8BB9E2172BE0C05600A45E64 /* ColorCardRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCardRepository.swift; sourceTree = "<group>"; };
 		8BB9E2192BE30FEC00A45E64 /* ColorCardDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCardDetailViewController.swift; sourceTree = "<group>"; };
 		8BB9E21D2BE3109600A45E64 /* ColorCard+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorCard+UIColor.swift"; sourceTree = "<group>"; };
+		8BB9E2202BE3114000A45E64 /* ColorCardDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCardDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				8BB9E2192BE30FEC00A45E64 /* ColorCardDetailViewController.swift */,
+				8BB9E2202BE3114000A45E64 /* ColorCardDetailView.swift */,
 			);
 			path = ColorCardDetailViewController;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 				8BB9E2122BE0666D00A45E64 /* ColorCardTableViewModel.swift in Sources */,
 				8BB9E1F02BDF77BC00A45E64 /* SceneDelegate.swift in Sources */,
 				8BB9E2032BDF7AEE00A45E64 /* ColorCard.swift in Sources */,
+				8BB9E2212BE3114000A45E64 /* ColorCardDetailView.swift in Sources */,
 				8BB9E21E2BE3109600A45E64 /* ColorCard+UIColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

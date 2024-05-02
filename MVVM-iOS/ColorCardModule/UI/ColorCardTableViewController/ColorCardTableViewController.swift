@@ -26,6 +26,7 @@ final class ColorCardTableViewController:
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNavigation()
         setupViews()
         colorCardTableViewModel.$colorCards
             .receive(on: DispatchQueue.main)
@@ -33,6 +34,10 @@ final class ColorCardTableViewController:
                 self?.colorCardTableView.reloadData()
             }
             .store(in: &cancellables)
+    }
+
+    private func configureNavigation() {
+        title = "Colors"
     }
 
     private func setupViews() {
@@ -78,6 +83,13 @@ final class ColorCardTableViewController:
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100.0
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let colorCard = colorCardTableViewModel.colorCards[indexPath.row]
+        let nextViewController = ColorCardDetailViewController()
+        nextViewController.colorCardDetailView.colorCard = colorCard
+        navigationController?.pushViewController(nextViewController, animated: true)
     }
 
     // MARK: - UITableViewDataSourcePrefetching

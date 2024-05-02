@@ -7,23 +7,32 @@
 
 import UIKit
 
-class ColorCardDetailViewController: UIViewController {
+final class ColorCardDetailViewController: UIViewController {
+
+    let colorCardDetailView: ColorCardDetailView = {
+        let view = ColorCardDetailView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        configureNavigation()
+        setupViews()
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func configureNavigation() {
+        title = colorCardDetailView.colorCard?.hexCode
     }
-    */
 
+    private func setupViews() {
+        view.addSubview(colorCardDetailView)
+
+        NSLayoutConstraint.activate([
+            colorCardDetailView.topAnchor.constraint(equalTo: view.topAnchor),
+            colorCardDetailView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            colorCardDetailView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            colorCardDetailView.rightAnchor.constraint(equalTo: view.rightAnchor)
+        ])
+    }
 }
