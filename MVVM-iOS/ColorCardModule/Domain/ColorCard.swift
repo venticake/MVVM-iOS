@@ -10,22 +10,49 @@ import Foundation
 struct ColorCard: Identifiable {
 
     let id: String
-    let hexCode: String
+    let red: Float
+    let green: Float
+    let blue: Float
+    let alpha: Float
 
-    init(id: String = UUID().uuidString, hexCode: String = generateRandomHexColor()) {
-        self.id = id
-        self.hexCode = hexCode
+    var redCGFloat: CGFloat {
+        return CGFloat(red)
+    }
+    var greenCGFloat: CGFloat {
+        return CGFloat(green)
+    }
+    var blueCGFloat: CGFloat {
+        return CGFloat(blue)
+    }
+    var alphaCGFloat: CGFloat {
+        return CGFloat(alpha)
+    }
+    var hexCode: String {
+        return "#\(changeToHex(floatValue: red))\(changeToHex(floatValue: green))\(changeToHex(floatValue: blue))\(changeToHex(floatValue: alpha))"
     }
 
-    private static func generateRandomHexColor() -> String {
-        // 랜덤하게 생성된 RGB 값을 저장할 배열 인스턴스 생성
-        var randomColorCode = "#"
+    init(id: String = UUID().uuidString, red: Float, green: Float, blue: Float, alpha: Float) {
+        self.id = id
+        self.red = Self.applyUnitRange(value: red)
+        self.green = Self.applyUnitRange(value: green)
+        self.blue = Self.applyUnitRange(value: blue)
+        self.alpha = Self.applyUnitRange(value: alpha)
+    }
 
-        for _ in 1...3 {
-            let randomByte = Int.random(in: 0...255)
-            randomColorCode += String(format: "%02X", randomByte)
-        }
+    static private func applyUnitRange(value: Float) -> Float {
+        if value < 0.0 { return 0.0 }
+        if value > 1.0 { return 1.0 }
 
-        return randomColorCode
+        return value
+    }
+
+    static func getRandomColorCard(alpha: Float = 1.0) -> Self {
+        return .init(red: Float.random(in: 0.0..<1.0), green: Float.random(in: 0.0..<1.0), blue: Float.random(in: 0.0..<1.0), alpha: alpha)
+    }
+
+    private func changeToHex(floatValue: Float) -> String {
+        let intValue = Int(floatValue * 255.0)
+
+        return String(format: "%02X", intValue)
     }
 }
