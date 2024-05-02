@@ -7,6 +7,8 @@
 
 import UIKit
 
+/// View
+///   - 전달받은 데이터를 화면에 present합니다.
 final class ColorCardDetailView: UIView {
 
     var colorCard: ColorCard? {

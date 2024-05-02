@@ -8,6 +8,8 @@
 import UIKit
 import Combine
 
+/// View (ViewController)
+///   - ViewModel을 binding함으로써, ui를 업데이트하는 역할을 수행합니다.
 final class ColorCardTableViewController:
     UIViewController,
     UITableViewDataSource,

@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Domain model
 struct ColorCard: Identifiable {
 
     let id: String

@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// ViewModel
+///   -  View에 present되기 위한 데이터를 관리하는 역할을 수행합니다. (*business logic은 처리하지 않습니다.*)
 @MainActor
 final class ColorCardViewModel: ObservableObject {
 

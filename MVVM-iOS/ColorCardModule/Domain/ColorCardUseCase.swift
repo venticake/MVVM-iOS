@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// UseCase
+///   - business logic을 담당하고 있습니다.
 struct ColorCardUseCase {
 
     private let colorCardRepository = ColorCardRepository()
