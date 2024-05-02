@@ -40,9 +40,7 @@ final class ColorCardViewModel: ObservableObject {
     }
 
     func changeToRandomColor(id: String) {
-        let newColorCard = ColorCard.getRandomColorCard(id: id)
-        let oldColorCards = colorCards
-        let newColorCards = oldColorCards.map { $0.id == id ? newColorCard : $0 }
+        let (newColorCard, newColorCards) = colorCardService.changeToRandomColor(id: id, from: colorCards)
         setColorCards(newColorCards)
         selectColorCard(newColorCard)
     }
