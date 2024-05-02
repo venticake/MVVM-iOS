@@ -13,7 +13,7 @@ final class ColorCardViewModel: ObservableObject {
     @Published private(set) var colorCards: [ColorCard] = []
     @Published private(set) var selectedColorCard: ColorCard?
 
-    private let colorCardService = ColorCardService()
+    private let colorCardUseCase = ColorCardUseCase()
     private var isFetching = false
 
     init() {
@@ -35,12 +35,12 @@ final class ColorCardViewModel: ObservableObject {
     }
 
     func removeColorCard(id: String) {
-        colorCards = colorCardService.removeColorCard(id: id, from: colorCards)
+        colorCards = colorCardUseCase.removeColorCard(id: id, from: colorCards)
         setColorCards(colorCards)
     }
 
     func changeToRandomColor(id: String) {
-        let (newColorCard, newColorCards) = colorCardService.changeToRandomColor(id: id, from: colorCards)
+        let (newColorCard, newColorCards) = colorCardUseCase.changeToRandomColor(id: id, from: colorCards)
         setColorCards(newColorCards)
         selectColorCard(newColorCard)
     }
@@ -50,7 +50,7 @@ final class ColorCardViewModel: ObservableObject {
             return
         }
         isFetching = true
-        let colorCards = await colorCardService.fetchColorCards(from: colorCards.count)
+        let colorCards = await colorCardUseCase.fetchColorCards(from: colorCards.count)
         setColorCards(self.colorCards + colorCards)
         isFetching = false
     }

@@ -1,5 +1,5 @@
 //
-//  ColorCardService.swift
+//  ColorCardUseCase.swift
 //  MVVM-iOS
 //
 //  Created by BYUNGWOOK JEONG on 4/30/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ColorCardService {
+struct ColorCardUseCase {
 
     private let colorCardRepository = ColorCardRepository()
 

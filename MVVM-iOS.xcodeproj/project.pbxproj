@@ -14,7 +14,7 @@
 		8BB9E2032BDF7AEE00A45E64 /* ColorCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9E2022BDF7AEE00A45E64 /* ColorCard.swift */; };
 		8BB9E2102BE0649700A45E64 /* ColorCardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9E20F2BE0649700A45E64 /* ColorCardTableViewController.swift */; };
 		8BB9E2122BE0666D00A45E64 /* ColorCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9E2112BE0666D00A45E64 /* ColorCardViewModel.swift */; };
-		8BB9E2142BE071D500A45E64 /* ColorCardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9E2132BE071D500A45E64 /* ColorCardService.swift */; };
+		8BB9E2142BE071D500A45E64 /* ColorCardUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9E2132BE071D500A45E64 /* ColorCardUseCase.swift */; };
 		8BB9E2162BE07EF500A45E64 /* ColorCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9E2152BE07EF500A45E64 /* ColorCardTableViewCell.swift */; };
 		8BB9E2182BE0C05600A45E64 /* ColorCardRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9E2172BE0C05600A45E64 /* ColorCardRepository.swift */; };
 		8BB9E21A2BE30FEC00A45E64 /* ColorCardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9E2192BE30FEC00A45E64 /* ColorCardDetailViewController.swift */; };
@@ -32,7 +32,7 @@
 		8BB9E2022BDF7AEE00A45E64 /* ColorCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCard.swift; sourceTree = "<group>"; };
 		8BB9E20F2BE0649700A45E64 /* ColorCardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCardTableViewController.swift; sourceTree = "<group>"; };
 		8BB9E2112BE0666D00A45E64 /* ColorCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCardViewModel.swift; sourceTree = "<group>"; };
-		8BB9E2132BE071D500A45E64 /* ColorCardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCardService.swift; sourceTree = "<group>"; };
+		8BB9E2132BE071D500A45E64 /* ColorCardUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCardUseCase.swift; sourceTree = "<group>"; };
 		8BB9E2152BE07EF500A45E64 /* ColorCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCardTableViewCell.swift; sourceTree = "<group>"; };
 		8BB9E2172BE0C05600A45E64 /* ColorCardRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCardRepository.swift; sourceTree = "<group>"; };
 		8BB9E2192BE30FEC00A45E64 /* ColorCardDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCardDetailViewController.swift; sourceTree = "<group>"; };
@@ -105,7 +105,7 @@
 			children = (
 				8BB9E2022BDF7AEE00A45E64 /* ColorCard.swift */,
 				8BB9E21D2BE3109600A45E64 /* ColorCard+UIColor.swift */,
-				8BB9E2132BE071D500A45E64 /* ColorCardService.swift */,
+				8BB9E2132BE071D500A45E64 /* ColorCardUseCase.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -206,7 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BB9E2142BE071D500A45E64 /* ColorCardService.swift in Sources */,
+				8BB9E2142BE071D500A45E64 /* ColorCardUseCase.swift in Sources */,
 				8BB9E21A2BE30FEC00A45E64 /* ColorCardDetailViewController.swift in Sources */,
 				8BB9E2102BE0649700A45E64 /* ColorCardTableViewController.swift in Sources */,
 				8BB9E2162BE07EF500A45E64 /* ColorCardTableViewCell.swift in Sources */,
