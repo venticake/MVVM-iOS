@@ -28,7 +28,12 @@ struct ColorCard: Identifiable {
         return CGFloat(alpha)
     }
     var hexCode: String {
-        return "#\(changeToHex(floatValue: red))\(changeToHex(floatValue: green))\(changeToHex(floatValue: blue))\(changeToHex(floatValue: alpha))"
+        let redHex = changeToHex(floatValue: red)
+        let greenHex = changeToHex(floatValue: green)
+        let blueHex = changeToHex(floatValue: blue)
+        let alphaHex = changeToHex(floatValue: alpha)
+
+        return "#\(redHex)\(greenHex)\(blueHex)\(alphaHex)"
     }
 
     init(id: String = UUID().uuidString, red: Float, green: Float, blue: Float, alpha: Float) {
@@ -46,8 +51,14 @@ struct ColorCard: Identifiable {
         return value
     }
 
-    static func getRandomColorCard(alpha: Float = 1.0) -> Self {
-        return .init(red: Float.random(in: 0.0..<1.0), green: Float.random(in: 0.0..<1.0), blue: Float.random(in: 0.0..<1.0), alpha: alpha)
+    static func getRandomColorCard(id: String = UUID().uuidString, alpha: Float = 1.0) -> Self {
+        return .init(
+            id: id,
+            red: Float.random(in: 0.0..<1.0),
+            green: Float.random(in: 0.0..<1.0),
+            blue: Float.random(in: 0.0..<1.0),
+            alpha: alpha
+        )
     }
 
     private func changeToHex(floatValue: Float) -> String {

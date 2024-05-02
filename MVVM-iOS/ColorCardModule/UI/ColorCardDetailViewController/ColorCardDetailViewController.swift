@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 final class ColorCardDetailViewController: UIViewController {
 
@@ -15,14 +16,29 @@ final class ColorCardDetailViewController: UIViewController {
         return view
     }()
 
+    var colorCardViewModel: ColorCardViewModel?
+    private var cancellables: Set<AnyCancellable> = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigation()
         setupViews()
+        colorCardViewModel?.$selectedColorCard
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] colorCard in
+                self?.configureNavigationTitle(title: colorCard?.hexCode)
+                self?.colorCardDetailView.colorCard = colorCard
+            }
+            .store(in: &cancellables)
+    }
+
+    private func configureNavigationTitle(title: String?) {
+        self.title = title
     }
 
     private func configureNavigation() {
-        title = colorCardDetailView.colorCard?.hexCode
+        configureNavigationTitle(title: colorCardViewModel?.selectedColorCard?.hexCode)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.clockwise"), style: .plain, target: self, action: #selector(onClickChangeColorButton))
     }
 
     private func setupViews() {
@@ -34,5 +50,12 @@ final class ColorCardDetailViewController: UIViewController {
             colorCardDetailView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             colorCardDetailView.rightAnchor.constraint(equalTo: view.rightAnchor)
         ])
+    }
+
+    @objc func onClickChangeColorButton() {
+        guard let selectedColorCard = colorCardViewModel?.selectedColorCard else {
+            return
+        }
+        colorCardViewModel?.changeToRandomColor(id: selectedColorCard.id)
     }
 }
