@@ -23,10 +23,9 @@ struct ColorCardUseCase {
         return newColorCards
     }
 
-    func changeToRandomColor(id: String, from oldColorCards: [ColorCard]) -> (newColorCard: ColorCard, newColorCards: [ColorCard]) {
-        let newColorCard = ColorCard.getRandomColorCard(id: id)
+    func changeColorCard(id: String, to newColorCard: ColorCard, from oldColorCards: [ColorCard]) -> [ColorCard] {
         let newColorCards = oldColorCards.map { $0.id == id ? newColorCard : $0 }
 
-        return (newColorCard, newColorCards)
+        return newColorCards
     }
 }

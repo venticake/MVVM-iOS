@@ -16,6 +16,9 @@ final class ColorCardTableViewController:
     UITableViewDelegate,
     UITableViewDataSourcePrefetching
 {
+    private let colorCardTableViewModel = ColorCardTableViewModel()
+    private var cancellables: Set<AnyCancellable> = []
+
     private let colorCardTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.register(ColorCardTableViewCell.self, forCellReuseIdentifier: "ColorCardTableViewCell")
@@ -23,14 +26,11 @@ final class ColorCardTableViewController:
         return tableView
     }()
 
-    private let colorCardViewModel = ColorCardViewModel()
-    private var cancellables: Set<AnyCancellable> = []
-
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigation()
         setupViews()
-        colorCardViewModel.$colorCards
+        colorCardTableViewModel.$colorCards
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.colorCardTableView.reloadData()
@@ -62,12 +62,12 @@ final class ColorCardTableViewController:
     // MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return colorCardViewModel.colorCards.count
+        return colorCardTableViewModel.colorCards.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ColorCardTableViewCell", for: indexPath) as! ColorCardTableViewCell
-        cell.colorCard = colorCardViewModel.colorCards[indexPath.row]
+        cell.colorCard = colorCardTableViewModel.colorCards[indexPath.row]
         cell.selectionStyle = .none
 
         return cell
@@ -75,8 +75,8 @@ final class ColorCardTableViewController:
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let colorCardId = colorCardViewModel.colorCards[indexPath.row].id
-            colorCardViewModel.removeColorCard(id: colorCardId)
+            let colorCardId = colorCardTableViewModel.colorCards[indexPath.row].id
+            colorCardTableViewModel.removeColorCard(id: colorCardId)
             colorCardTableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
@@ -88,10 +88,9 @@ final class ColorCardTableViewController:
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let colorCard = colorCardViewModel.colorCards[indexPath.row]
-        let nextViewController = ColorCardDetailViewController()
-        nextViewController.colorCardViewModel = colorCardViewModel
-        nextViewController.colorCardViewModel?.selectColorCard(colorCard)
+        let colorCard = colorCardTableViewModel.colorCards[indexPath.row]
+        let nextViewController = ColorCardDetailViewController(colorCard: colorCard)
+        nextViewController.colorCardDetailViewModel.delegate = colorCardTableViewModel
         navigationController?.pushViewController(nextViewController, animated: true)
     }
 
@@ -99,12 +98,12 @@ final class ColorCardTableViewController:
 
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         guard let maxIndexPath = indexPaths.max(by: { $0.row < $1.row }),
-              maxIndexPath.row >= colorCardViewModel.colorCards.count - 1 else {
+              maxIndexPath.row >= colorCardTableViewModel.colorCards.count - 1 else {
             return
         }
 
         Task {
-            await colorCardViewModel.fetchNextColorCards()
+            await colorCardTableViewModel.fetchNextColorCards()
         }
     }
 }

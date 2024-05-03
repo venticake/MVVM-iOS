@@ -12,30 +12,35 @@ import Combine
 ///   - ViewModel을 binding함으로써, ui를 업데이트하는 역할을 수행합니다.
 final class ColorCardDetailViewController: UIViewController {
 
-    let colorCardDetailView: ColorCardDetailView = {
+    let colorCardDetailViewModel: ColorCardDetailViewModel
+    private var cancellables: Set<AnyCancellable> = []
+
+    private let colorCardDetailView: ColorCardDetailView = {
         let view = ColorCardDetailView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
-    var colorCardViewModel: ColorCardViewModel?
-    private var cancellables: Set<AnyCancellable> = []
-
+    init(colorCard: ColorCard) {
+        colorCardDetailViewModel = .init(colorCard: colorCard)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigation()
         setupViews()
-        colorCardViewModel?.$selectedColorCard
+        colorCardDetailViewModel.$colorCard
             .receive(on: DispatchQueue.main)
             .sink { [weak self] colorCard in
-                self?.configureNavigationTitle(title: colorCard?.hexCode)
+                self?.configureNavigationTitle(title: colorCard.hexCode)
                 self?.colorCardDetailView.colorCard = colorCard
             }
             .store(in: &cancellables)
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        colorCardViewModel?.deselectColorCard()
     }
 
     private func configureNavigationTitle(title: String?) {
@@ -43,7 +48,7 @@ final class ColorCardDetailViewController: UIViewController {
     }
 
     private func configureNavigation() {
-        configureNavigationTitle(title: colorCardViewModel?.selectedColorCard?.hexCode)
+        configureNavigationTitle(title: colorCardDetailViewModel.colorCard.hexCode)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.clockwise"), style: .plain, target: self, action: #selector(onClickChangeColorButton))
     }
 
@@ -59,9 +64,6 @@ final class ColorCardDetailViewController: UIViewController {
     }
 
     @objc func onClickChangeColorButton() {
-        guard let selectedColorCard = colorCardViewModel?.selectedColorCard else {
-            return
-        }
-        colorCardViewModel?.changeToRandomColor(id: selectedColorCard.id)
+        colorCardDetailViewModel.changeToRandomColor(id: colorCardDetailViewModel.colorCard.id)
     }
 }
