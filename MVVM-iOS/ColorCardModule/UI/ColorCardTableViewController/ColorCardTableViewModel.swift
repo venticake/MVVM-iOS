@@ -43,8 +43,8 @@ final class ColorCardTableViewModel: ObservableObject, ColorCardDetailViewModelD
 
     // MARK: - ColorCardDetailViewModelDelegate
 
-    func changeColorCard(_ colorCard: ColorCard) {
-        let colorCards = colorCardUseCase.changeColorCard(id: colorCard.id, to: colorCard, from: colorCards)
+    func replaceColorCard(_ colorCard: ColorCard) {
+        let colorCards = colorCardUseCase.replaceColorCard(id: colorCard.id, to: colorCard, from: colorCards)
         setColorCards(colorCards)
     }
 }

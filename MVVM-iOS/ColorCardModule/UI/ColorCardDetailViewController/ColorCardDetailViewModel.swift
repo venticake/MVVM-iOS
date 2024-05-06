@@ -27,7 +27,7 @@ final class ColorCardDetailViewModel: ObservableObject {
 
     func changeToRandomColor(id: String) {
         let randomColorCard = ColorCard.getRandomColorCard(id: id)
-        delegate?.changeColorCard(randomColorCard)
+        delegate?.replaceColorCard(randomColorCard)
         setColorCard(randomColorCard)
     }
 }
@@ -38,5 +38,5 @@ final class ColorCardDetailViewModel: ObservableObject {
 ///   - 다른 ViewModel과의 통신을 위해 사용됩니다.
 protocol ColorCardDetailViewModelDelegate: AnyObject {
 
-    func changeColorCard(_ colorCard: ColorCard)
+    func replaceColorCard(_ colorCard: ColorCard)
 }
