@@ -14,7 +14,8 @@ final class ColorCardTableViewController:
     UIViewController,
     UITableViewDataSource,
     UITableViewDelegate,
-    UITableViewDataSourcePrefetching
+    UITableViewDataSourcePrefetching,
+    ColorCardDetailViewControllerDelegate
 {
     private let colorCardTableViewModel = ColorCardTableViewModel()
     private var cancellables: Set<AnyCancellable> = []
@@ -90,7 +91,7 @@ final class ColorCardTableViewController:
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let colorCard = colorCardTableViewModel.colorCards[indexPath.row]
         let nextViewController = ColorCardDetailViewController(colorCard: colorCard)
-        nextViewController.colorCardDetailViewModel.delegate = colorCardTableViewModel
+        nextViewController.delegate = self
         navigationController?.pushViewController(nextViewController, animated: true)
     }
 
@@ -105,5 +106,11 @@ final class ColorCardTableViewController:
         Task {
             await colorCardTableViewModel.fetchNextColorCards()
         }
+    }
+
+    // MARK: - ColorCardDetailViewControllerDelegate
+
+    func replaceColorCard(_ colorCard: ColorCard) {
+        colorCardTableViewModel.replaceColorCard(colorCard)
     }
 }

@@ -15,8 +15,6 @@ final class ColorCardDetailViewModel: ObservableObject {
 
     private let colorCardUseCase = ColorCardUseCase()
 
-    weak var delegate: ColorCardDetailViewModelDelegate?
-
     init(colorCard: ColorCard) {
         self.colorCard = colorCard
     }
@@ -25,18 +23,11 @@ final class ColorCardDetailViewModel: ObservableObject {
         self.colorCard = colorCard
     }
 
-    func changeToRandomColor(id: String) {
-        let randomColorCard = ColorCard.getRandomColorCard(id: id)
-        delegate?.replaceColorCard(randomColorCard)
-        setColorCard(randomColorCard)
+    @discardableResult
+    func applyRandomColor() -> ColorCard {
+        let colorCard = ColorCard.getRandomColorCard(id: colorCard.id)
+        setColorCard(colorCard)
+
+        return colorCard
     }
-}
-
-// MARK: - ColorCardDetailViewModelDelegate
-
-/// Delegate
-///   - 다른 ViewModel과의 통신을 위해 사용됩니다.
-protocol ColorCardDetailViewModelDelegate: AnyObject {
-
-    func replaceColorCard(_ colorCard: ColorCard)
 }

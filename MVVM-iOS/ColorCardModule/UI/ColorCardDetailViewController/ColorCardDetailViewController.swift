@@ -12,6 +12,8 @@ import Combine
 ///   - ViewModel을 binding함으로써, ui를 업데이트하는 역할을 수행합니다.
 final class ColorCardDetailViewController: UIViewController {
 
+    weak var delegate: ColorCardDetailViewControllerDelegate?
+
     let colorCardDetailViewModel: ColorCardDetailViewModel
     private var cancellables: Set<AnyCancellable> = []
 
@@ -64,6 +66,16 @@ final class ColorCardDetailViewController: UIViewController {
     }
 
     @objc func onClickChangeColorButton() {
-        colorCardDetailViewModel.changeToRandomColor(id: colorCardDetailViewModel.colorCard.id)
+        let colorCard = colorCardDetailViewModel.applyRandomColor()
+        delegate?.replaceColorCard(colorCard)
     }
+}
+
+// MARK: - ColorCardDetailViewControllerDelegate
+
+/// Delegate
+///   - 다른 ViewController와의 통신을 위해 사용됩니다.
+protocol ColorCardDetailViewControllerDelegate: AnyObject {
+
+    func replaceColorCard(_ colorCard: ColorCard)
 }

@@ -9,7 +9,7 @@ import Foundation
 
 /// ViewModel
 ///   -  View에 present되기 위한 데이터를 관리하는 역할을 수행합니다. (*business logic은 처리하지 않습니다.*)
-final class ColorCardTableViewModel: ObservableObject, ColorCardDetailViewModelDelegate {
+final class ColorCardTableViewModel: ObservableObject {
 
     @Published private(set) var colorCards: [ColorCard] = []
 
@@ -40,8 +40,6 @@ final class ColorCardTableViewModel: ObservableObject, ColorCardDetailViewModelD
         setColorCards(self.colorCards + colorCards)
         isFetching = false
     }
-
-    // MARK: - ColorCardDetailViewModelDelegate
 
     func replaceColorCard(_ colorCard: ColorCard) {
         let colorCards = colorCardUseCase.replaceColorCard(id: colorCard.id, to: colorCard, from: colorCards)
